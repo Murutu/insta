@@ -4,13 +4,13 @@ import Header from '../components/Header'
 
 export default function Home() {
   return (
-    <div className="">
+    <div className="bg-gray-50 h-screen overflow-y-auto">
       <Head>
         <title>Instagram</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Feed />
       <Header />
+      <Feed />
     </div>
   )
 }
