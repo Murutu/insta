@@ -1,3 +1,10 @@
+/* 
+      1)create post & add to firestore 'posts' collection
+      2)get the post ID for the newly created post
+      3)upload the image to firebase storage with the post ID
+      4)get a download URL from to storage & update the original post with image
+      */
+
 import {
   addDoc,
   doc,
@@ -27,27 +34,18 @@ function Modal() {
 
     setLoading(true)
 
-    /* 
-      1)create post & add to firestore 'posts' collection
-      2)get the post ID for the newly created post
-      3)upload the image to firebase storage with the post ID
-      4)get a download URL from to storage & update the original post with image
-      */
-
     const docRef = await addDoc(collection(db, 'posts'), {
       username: session.user.name,
       caption: captionRef.current.value,
       profileImg: session.user.image,
-      timeStamp: serverTimestamp(),
+      timestamp: serverTimestamp(),
     })
-    console.log('New doc added with ID', docRef.id)
 
-    const imageRef = ref(storage, `posts/$(docRef.id)/image`)
+    const imageRef = ref(storage, `posts/${docRef.id}/image`)
 
     await uploadString(imageRef, selectedFile, 'data_url').then(
       async (snapshot) => {
         const downloadURL = await getDownloadURL(imageRef)
-
         await updateDoc(doc(db, 'posts', docRef.id), {
           image: downloadURL,
         })

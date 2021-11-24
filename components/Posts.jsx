@@ -1,26 +1,29 @@
+import { collection, onSnapshot, orderBy, query } from '@firebase/firestore'
+import { useState, useEffect } from 'react'
+import { db } from '../firebase'
 import Post from './Post'
 
-const posts = [
-  {
-    id: '123',
-    username: 'majid',
-    userImg: '/peter.png',
-    img: 'https://bit.ly/3CoD0B7',
-    caption: 'Sankt, PeterBurg-Russia',
-  },
-]
-
 function Posts() {
+  const [posts, setPosts] = useState([])
+
+  useEffect(
+    () =>
+      onSnapshot(query(collection(db, 'posts')), (snapshot) => {
+        setPosts(snapshot.docs)
+      }),
+    [db],
+  )
+
   return (
     <div>
       {posts.map((post) => (
         <Post
           key={post.id}
           id={post.id}
-          username={post.username}
-          userImg={post.userImg}
-          img={post.img}
-          caption={post.caption}
+          username={post.data().username}
+          userImg={post.data().profileImg}
+          img={post.data().image}
+          caption={post.data().caption}
         />
       ))}
     </div>
