@@ -44,20 +44,19 @@ function Header() {
 
           <div className="max-w-xs">
             <div className="relative mt-1 p-3 rounded-md">
-              <div className="absolute inset-y-0 pl-3 flex items-center pointer-events-none">
+              {/* <div className="absolute inset-y-0 pl-3 flex items-center pointer-events-none">
                 <SearchIcon className="h-5 w-5 text-gray-500" />
-              </div>
-              <input
+              </div> */}
+              {/* <input
                 className="bg-gray-50 w-full pl-10 sm:text-sm border-gray-300 focus:ring-black focus:border-black"
                 type="text"
                 placeholder="Search"
-              />
+              /> */}
             </div>
           </div>
 
           <div className="flex items-center justify-end space-x-5">
             <HomeIcon onClick={() => router.push('/')} className="navBtn" />
-            <MenuIcon className="h-6 md:hidden cursor-pointer" />
 
             {session ? (
               <>
@@ -76,8 +75,8 @@ function Header() {
                   onClick={() => setOpen(true)}
                   className="navBtn"
                 />
-                <UserGroupIcon className="navBtn" />
-                <HeartIcon className="navBtn" />
+                {/* <UserGroupIcon className="navBtn" />
+                <HeartIcon className="navBtn" /> */}
 
                 <img
                   onClick={signOut}
