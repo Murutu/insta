@@ -68,15 +68,10 @@ function Header() {
               onClick={handleClick}
             />
 
-            <div
-              className={`${
-                active ? '' : 'hidden'
-              }    lg:inline-flex lg:flex-grow lg:w-auto`}
-            >
-              {session ? (
-                <>
-                  <div className="relative navBtn">
-                    {/* <PaperAirplaneIcon className="navBtn rotate-45" />
+            {session ? (
+              <>
+                <div className="relative navBtn">
+                  {/* <PaperAirplaneIcon className="navBtn rotate-45" />
                     <div
                       className="absolute -top-1 -right-2 text-xs w-5 h-5 
               bg-red-500 rounded-full flex items-center justify-center 
@@ -84,28 +79,27 @@ function Header() {
                     >
                       10
                     </div> */}
-                  </div>
+                </div>
 
-                  <PlusCircleIcon
-                    onClick={() => setOpen(true)}
-                    className="navBtn"
-                  />
-                  <UserGroupIcon className="navBtn" />
-                  <HeartIcon className="navBtn" />
+                <PlusCircleIcon
+                  onClick={() => setOpen(true)}
+                  className="navBtn"
+                />
+                <UserGroupIcon className="navBtn" />
+                <HeartIcon className="navBtn" />
 
-                  <img
-                    onClick={signOut}
-                    src={session.user.image}
-                    alt="profile pic"
-                    className="h-10 rounded-full cursor-pointer"
-                    width="44"
-                    height="44"
-                  />
-                </>
-              ) : (
-                <button onClick={signIn}>Sign In</button>
-              )}
-            </div>
+                <img
+                  onClick={signOut}
+                  src={session.user.image}
+                  alt="profile pic"
+                  className="h-10 rounded-full cursor-pointer"
+                  width="44"
+                  height="44"
+                />
+              </>
+            ) : (
+              <button onClick={signIn}>Sign In</button>
+            )}
           </div>
         </div>
       </div>
