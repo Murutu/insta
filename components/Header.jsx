@@ -1,3 +1,4 @@
+import React, { useState } from 'react'
 import Image from 'next/image'
 import {
   SearchIcon,
@@ -17,6 +18,12 @@ function Header() {
   const { data: session, status } = useSession()
   const [open, setOpen] = useRecoilState(modalState)
   const router = useRouter()
+
+  const [active, setActive] = useState(false)
+
+  const handleClick = () => {
+    setActive(!active)
+  }
 
   return (
     <>
@@ -46,8 +53,8 @@ function Header() {
             <div className="relative mt-1 p-3 rounded-md">
               {/* <div className="absolute inset-y-0 pl-3 flex items-center pointer-events-none">
                 <SearchIcon className="h-5 w-5 text-gray-500" />
-              </div> */}
-              {/* <input
+              </div>
+              <input
                 className="bg-gray-50 w-full pl-10 sm:text-sm border-gray-300 focus:ring-black focus:border-black"
                 type="text"
                 placeholder="Search"
@@ -55,41 +62,50 @@ function Header() {
             </div>
           </div>
 
-          <div className="flex items-center justify-end space-x-5">
-            <HomeIcon onClick={() => router.push('/')} className="navBtn" />
+          <div className="flex items-center justify-end space-x-6">
+            <MenuIcon
+              className="h-6 md:hidden cursor-pointer"
+              onClick={handleClick}
+            />
 
-            {session ? (
-              <>
-                <div className="relative navBtn">
-                  <PaperAirplaneIcon className="navBtn rotate-45" />
-                  <div
-                    className="absolute -top-1 -right-2 text-xs w-5 h-5 
+            <div
+              className={`${
+                active ? '' : 'hidden'
+              }    lg:inline-flex lg:flex-grow lg:w-auto`}
+            >
+              {session ? (
+                <>
+                  <div className="relative navBtn">
+                    {/* <PaperAirplaneIcon className="navBtn rotate-45" />
+                    <div
+                      className="absolute -top-1 -right-2 text-xs w-5 h-5 
               bg-red-500 rounded-full flex items-center justify-center 
               animate-pulse text-white"
-                  >
-                    10
+                    >
+                      10
+                    </div> */}
                   </div>
-                </div>
 
-                <PlusCircleIcon
-                  onClick={() => setOpen(true)}
-                  className="navBtn"
-                />
-                {/* <UserGroupIcon className="navBtn" />
-                <HeartIcon className="navBtn" /> */}
+                  <PlusCircleIcon
+                    onClick={() => setOpen(true)}
+                    className="navBtn"
+                  />
+                  <UserGroupIcon className="navBtn" />
+                  <HeartIcon className="navBtn" />
 
-                <img
-                  onClick={signOut}
-                  src={session.user.image}
-                  alt="profile pic"
-                  className="h-10 rounded-full cursor-pointer"
-                  width="44"
-                  height="44"
-                />
-              </>
-            ) : (
-              <button onClick={signIn}>Sign In</button>
-            )}
+                  <img
+                    onClick={signOut}
+                    src={session.user.image}
+                    alt="profile pic"
+                    className="h-10 rounded-full cursor-pointer"
+                    width="44"
+                    height="44"
+                  />
+                </>
+              ) : (
+                <button onClick={signIn}>Sign In</button>
+              )}
+            </div>
           </div>
         </div>
       </div>
