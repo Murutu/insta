@@ -8,6 +8,7 @@ function signIn({ providers }) {
 
       <div className="flex flex-col items-center justify-center text-center">
         <img className="w-80 mt-20" src="/logo.png" alt="" />
+
         <div className="mt-40">
           {Object.values(providers).map((provider) => (
             <div key={provider.name}>
@@ -29,6 +30,7 @@ function signIn({ providers }) {
 
 export async function getServerSideProps() {
   const providers = await getProviders()
+  console.log(providers)
 
   return {
     props: {
